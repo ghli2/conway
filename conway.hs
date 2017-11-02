@@ -41,7 +41,7 @@ toVal o n
     | o == 1 = 1
     | otherwise = 0
 evolve :: Grid -> Grid
-evolve xxs = [ [ toVal (get xxs (x,y)) (nsum xxs (x,y)) | y <- [0..100], y < length (xxs!!x)] | x <- [0..100], x < length xxs]
+evolve xxs = [ [ toVal (get xxs (x,y)) (nsum xxs (x,y)) | y <- [0..(length (xxs!!x))-1]] | x <- [0..(length xxs)-1]]
 
 --Ideally, I'd have used ncurses or something like that
 --But I was too lazy, lel
