@@ -43,6 +43,8 @@ toVal o n
 evolve :: Grid -> Grid
 evolve xxs = [ [ toVal (get xxs (x,y)) (nsum xxs (x,y)) | y <- [0..100], y < length (xxs!!x)] | x <- [0..100], x < length xxs]
 
+--Ideally, I'd have used ncurses or something like that
+--But I was too lazy, lel
 printGrid g = let printCpt 1 = putStr "■ "
                   printCpt 0 = putStr ". "
               in mapM_ (\xs -> do
@@ -55,3 +57,4 @@ simulate g = do
     threadDelay 500000;
     simulate g2
 
+main = simulate g0
