@@ -7,6 +7,7 @@ ogrid = do {
     return (x,y)
 }
 
+--Hardcoded in a cool pattern. Bite me.
 g0 = (take 8 $ repeat $ take 21 $ repeat 0) ++ [(take 10 $ repeat 0)++    [1]++(take 10 $ repeat 0),
                                                 (take  9 $ repeat 0)++[1,1,1]++(take  9 $ repeat 0),
                                                 (take  9 $ repeat 0)++[1,0,1]++(take  9 $ repeat 0),
@@ -20,13 +21,14 @@ type Grid = [[Int]]
 apply :: PoFunc -> Point -> Point
 apply (f1,f2) (r1,r2) = (f1 r1,f2 r2)
 
+--filters remove negatives and identities
 neighborP :: [PoFunc] -> Point -> [Point]
 neighborP fs p = filter (\p2@(_,_) -> p /= p2) $ filter (\(r1,r2) -> r1 >= 0 && r2 >= 0) $ (\f -> apply f p) <$> fs
 
 get :: Grid -> Point -> Int
 get xxs (r1,r2)
     |r1 >= length xxs = 0
-    |r2 >= length (xxs!!0) = 0
+    |r2 >= length (xxs!!r1) = 0
     |otherwise = (xxs!!r1)!!r2
 
 nsum :: Grid -> Point -> Int
